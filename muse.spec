@@ -8,7 +8,7 @@ Summary:	Linux Music Editor
 Summary(pl):	Edytor muzyczny dla Linuksa
 Name:		muse
 Version:	0.7.1
-Release:	0.1
+Release:	0.2
 License:	GPL
 Group:		X11/Applications/Sound
 Source0:	http://dl.sourceforge.net/lmuse/%{name}-%{version}.tar.bz2
@@ -71,13 +71,14 @@ export QTDIR
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_desktopdir}
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	SUIDINSTALL="no"
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+install packaging/muse_icon.png $RPM_BUILD_ROOT%{_pixmapsdir}/muse.png
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/plugins/*.a
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/synthi/*.a
@@ -97,5 +98,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/plugins/*
 %attr(755,root,root) %{_libdir}/%{name}/qtplugins/designer/*
 %attr(755,root,root) %{_libdir}/%{name}/synthi/*
-%{_desktopdir}/*.desktop
+%{_desktopdir}/muse.desktop
+%{_pixmapsdir}/muse.png
 %{_datadir}/muse
