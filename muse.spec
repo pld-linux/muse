@@ -11,7 +11,7 @@ Version:	0.6.2
 Release:	1
 License:	GPL
 Group:		X11/Applications/Sound
-Source0:	http://dl.sf.net/lmuse/%{name}-%{version}.tar.bz2
+Source0:	http://dl.sourceforge.net/lmuse/%{name}-%{version}.tar.bz2
 # Source0-md5:	e12491f3f399751c1648ecb55770dde0
 Source1:	%{name}.desktop
 URL:		http://muse.seh.de/
