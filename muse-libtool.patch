@@ -1,0 +1,16 @@
+diff -Nur old/common.am new/common.am
+--- old/common.am	2004-11-29 14:32:48.000000000 +0000
++++ new/common.am	2005-03-22 11:35:20.000000000 +0000
+@@ -34,11 +34,10 @@
+ 	$(UIC) -L $(top_srcdir)/muse/widgets -o $*.cpp -impl $*.h $*.ui
+ 	$(MOC) $*.h -o moc_$*.cpp
+ 	$(LTCXXCOMPILE) -c $*.cpp -o base_$*.lo
++	$(LTCXXCOMPILE) -c $*.cpp -o $*.lo
+ 	$(LTCXXCOMPILE) -c moc_$*.cpp -o moc_$*.lo
+-	$(CXXLINK) -r base_$*.lo moc_$*.lo -o $*.lo
+ 	$(RM) $*.cpp moc_$*.cpp base_$*.lo moc_$*.lo base_$*.o moc_$*.o
+ 
+-
+ moc_%.cpp: %.h
+ 	$(MOC) $< -o $@
+ 
