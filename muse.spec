@@ -49,7 +49,7 @@ MuSE jest sekwencerem MIDI/Audio z mo¿liwo¶ciami nagrywania i edycji.
 QTDIR="%{_prefix}"
 export QTDIR
 
-# NOTE: you _must_ compile MusE with the same compiler you used to compile QT
+# NOTE: you _must_ compile MusE with the same compiler you used to compile Qt
 %configure \
 	%{?!with_ladcca:--disable-ladcca} \
 	%{?!with_fluid:--disable-fluidsynth} \
