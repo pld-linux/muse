@@ -14,6 +14,7 @@ Group:		X11/Applications/Sound
 Source0:	http://dl.sourceforge.net/lmuse/%{name}-%{version}.tar.bz2
 # Source0-md5:	0e47ab9ba98d230e4fd7ea7ef40ed37c
 Source1:	%{name}.desktop
+Patch0:		%{name}-libtool.patch
 URL:		http://muse.seh.de/
 BuildRequires:	alsa-lib-devel >= 0.9.0
 BuildRequires:	autoconf
@@ -41,6 +42,7 @@ MuSE jest sekwencerem MIDI/Audio z mo¿liwo¶ciami nagrywania i edycji.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
