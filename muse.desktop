@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=MuSE
+Comment=MuSE Audio/MIDI Sequnecer
+Comment[pl]=MuSE Audio/MIDI sekwencer
+Exec=/usr/bin/muse
+Terminal=0
+Type=Application
