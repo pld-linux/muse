@@ -6,5 +6,5 @@ Comment[pl]=MuSE Audio/MIDI sekwencer
 Exec=/usr/bin/muse
 Terminal=false
 Type=Application
-Categories=Application;AudioVideo;
+Categories=AudioVideo;Sequencer;
 # vi: encoding=utf-8
