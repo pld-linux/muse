@@ -7,22 +7,24 @@
 Summary:	Linux Music Editor
 Summary(pl):	Edytor muzyczny dla Linuxa
 Name:		muse
-Version:	0.6.1
+Version:	0.6.2
 Release:	1
 License:	GPL
 Group:		X11/Applications/Sound
-Source0:	http://muse.seh.de/bin/%{name}-%{version}.tar.bz2
+Source0:	http://dl.sf.net/lmuse/%{name}-%{version}.tar.bz2
 # Source0-md5:	059f1818b41a9392c3fbe1bb54101432
 Source1:	%{name}.desktop
-Patch0:		%{name}-qt_designer_version.patch
 URL:		http://muse.seh.de/
-BuildRequires:	alsa-lib-devel
+BuildRequires:	alsa-lib-devel >= 0.9.0
 BuildRequires:	autoconf
 BuildRequires:	automake
 %{?with_fluid:BuildRequires:	fluidsynth-devel >= 1.0.0}
 %{?with_jack:BuildRequires:	jack-audio-connection-kit-devel}
 %{?with_ladcca:BuildRequires:	ladcca-devel}
+BuildRequires:	docbook-dtd41-sgml
+BuildRequires:	doxygen
 BuildRequires:	libsndfile-devel
+BuildRequires:	openjade
 BuildRequires:	pkgconfig
 BuildRequires:	qt-devel >= 3.1.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -32,14 +34,12 @@ MusE is a MIDI/Audio sequencer with recording and editing
 capabilities.
 
 %description -l pl
-MuSE jest sequencerem MIDI/Audio z mo¿liwo¶ciami nagrywania i edycji.
+MuSE jest sekwencerem MIDI/Audio z mo¿liwo¶ciami nagrywania i edycji.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
-rm -f missing
 %{__aclocal} -I m4
 %{__autoheader}
 %{__automake}
@@ -73,6 +73,9 @@ install -d $RPM_BUILD_ROOT%{_desktopdir}
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/plugins/*.a
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/synthi/*.a
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -83,7 +86,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/plugins
 %dir %{_libdir}/%{name}/synthi
-%attr(755,root,root) %{_libdir}/%{name}/plugins/*.so
+%attr(755,root,root) %{_libdir}/%{name}/plugins/*
 %attr(755,root,root) %{_libdir}/%{name}/synthi/*
 %{_desktopdir}/*.desktop
 %{_datadir}/muse
