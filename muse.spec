@@ -24,6 +24,7 @@ BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	docbook-dtd41-sgml
 BuildRequires:	doxygen
 BuildRequires:	libsndfile-devel
+BuildRequires:	libsamplerate-devel >= 0.1.0
 BuildRequires:	openjade
 BuildRequires:	pkgconfig
 BuildRequires:	qt-designer-libs
