@@ -6,6 +6,7 @@ Release:	1
 License:	GPL
 Group:		X11/Applications/Sound
 Source0:	http://muse.seh.de/bin/%{name}-%{version}.tar.bz2
+# Source0-md5: 9de8f1f413ebda34458379ba17049b3c
 Source1:	%{name}.desktop
 URL:		http://muse.seh.de/
 BuildRequires:	alsa-lib-devel
