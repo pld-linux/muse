@@ -23,8 +23,9 @@ BuildRequires:	jack-audio-connection-kit-devel
 %{?with_ladcca:BuildRequires:	ladcca-devel}
 BuildRequires:	docbook-dtd41-sgml
 BuildRequires:	doxygen
-BuildRequires:	libsndfile-devel
 BuildRequires:	libsamplerate-devel >= 0.1.0
+BuildRequires:	libsndfile-devel
+BuildRequires:	libtool
 BuildRequires:	openjade
 BuildRequires:	pkgconfig
 BuildRequires:	qt-designer-libs
@@ -42,6 +43,7 @@ MuSE jest sekwencerem MIDI/Audio z mo¿liwo¶ciami nagrywania i edycji.
 %setup -q
 
 %build
+%{__libtoolize}
 %{__aclocal} -I m4
 %{__autoheader}
 %{__automake}
