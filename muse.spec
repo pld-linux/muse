@@ -5,7 +5,7 @@
 %bcond_without	fluid	# disable fluidsynth support
 #
 Summary:	Linux Music Editor
-Summary(pl):	Edytor muzyczny dla Linuxa
+Summary(pl):	Edytor muzyczny dla Linuksa
 Name:		muse
 Version:	0.7.0
 Release:	0.1
