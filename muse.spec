@@ -1,3 +1,9 @@
+#
+# Conditional build:
+%bcond_with ladcca	# enable ladcca support
+%bcond_without jack	# disable jack support
+%bcond_without fluid	# disable fluidsynth support
+#
 Summary:	Linux Music Editor
 Summary(pl):	Edytor muzyczny dla Linuxa
 Name:		muse
@@ -13,9 +19,9 @@ URL:		http://muse.seh.de/
 BuildRequires:	alsa-lib-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	fluidsynth-devel >= 1.0.0
-BuildRequires:	jack-audio-connection-kit-devel
-BuildRequires:	ladcca-devel
+%{?with_fluid:BuildRequires:	fluidsynth-devel >= 1.0.0}
+%{?with_jack:BuildRequires:	jack-audio-connection-kit-devel}
+%{?with_ladcca:BuildRequires:	ladcca-devel}
 BuildRequires:	libsndfile-devel
 BuildRequires:	pkgconfig
 BuildRequires:	qt-devel >= 3.1.2
@@ -42,28 +48,30 @@ rm -f missing
 QTDIR="%{_prefix}"
 export QTDIR
 
-CXXFLAGS="%{rpmcflags} -DNDEBUG"
 # NOTE: you _must_ compile MusE with the same compiler you used to compile QT
 %configure \
-	--with-qt-prefix=%{_prefix} \
-	--with-qt-libraries=%{_libdir} \
-	--with-qt-includes=%{_includedir}/qt \
+	%{?!with_ladcca:--disable-ladcca} \
+	%{?!with_fluid:--disable-fluidsynth} \
+	%{?!with_jack:--disable-jack} \
 	--disable-qttest \
 	--disable-suid-build \
 	--disable-suid-install \
 	--enable-patchbay \
-	--with-docbook-stylesheets=%{_datadir}/sgml/docbook/dsssl-stylesheets
+	--with-docbook-stylesheets=%{_datadir}/sgml/docbook/dsssl-stylesheets \
+	--with-qt-includes=%{_includedir}/qt \
+	--with-qt-libraries=%{_libdir} \
+	--with-qt-prefix=%{_prefix}
 
-%{__make} CXXFLAGS="%{rpmcflags} -DNDEBUG"
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_applnkdir}/Multimedia
+install -d $RPM_BUILD_ROOT%{_desktopdir}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Multimedia
+install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -77,5 +85,5 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/%{name}/synthi
 %attr(755,root,root) %{_libdir}/%{name}/plugins/*.so
 %attr(755,root,root) %{_libdir}/%{name}/synthi/*
-%{_applnkdir}/Multimedia/%{name}.desktop
+%{_desktopdir}/*.desktop
 %{_datadir}/muse
