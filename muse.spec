@@ -1,32 +1,33 @@
 #
 # Conditional build:
-%bcond_with ladcca	# enable ladcca support
-%bcond_without jack	# disable jack support
-%bcond_without fluid	# disable fluidsynth support
+%bcond_with	ladcca	# enable ladcca support
+%bcond_with	pch	# enable gcc 3.4.x pch support
+%bcond_without	fluid	# disable fluidsynth support
 #
 Summary:	Linux Music Editor
 Summary(pl):	Edytor muzyczny dla Linuxa
 Name:		muse
-Version:	0.6.3
-Release:	1
+Version:	0.7.0
+Release:	0.1
 License:	GPL
 Group:		X11/Applications/Sound
 Source0:	http://dl.sourceforge.net/lmuse/%{name}-%{version}.tar.bz2
-# Source0-md5:	a890a487a8316c6953e7f0384410e21a
+# Source0-md5:	b0794c112a39fa87f455c704ebc6a908
 Source1:	%{name}.desktop
 URL:		http://muse.seh.de/
 BuildRequires:	alsa-lib-devel >= 0.9.0
 BuildRequires:	autoconf
 BuildRequires:	automake
 %{?with_fluid:BuildRequires:	fluidsynth-devel >= 1.0.0}
-%{?with_jack:BuildRequires:	jack-audio-connection-kit-devel}
+BuildRequires:	jack-audio-connection-kit-devel
 %{?with_ladcca:BuildRequires:	ladcca-devel}
 BuildRequires:	docbook-dtd41-sgml
 BuildRequires:	doxygen
 BuildRequires:	libsndfile-devel
 BuildRequires:	openjade
 BuildRequires:	pkgconfig
-BuildRequires:	qt-devel >= 3.1.2
+BuildRequires:	qt-designer-libs
+BuildRequires:	qt-devel >= 3.2.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -52,8 +53,7 @@ export QTDIR
 %configure \
 	%{?!with_ladcca:--disable-ladcca} \
 	%{?!with_fluid:--disable-fluidsynth} \
-	%{?!with_jack:--disable-jack} \
-	--disable-qttest \
+	%{?with_pch:--enable-pch} \
 	--disable-suid-build \
 	--disable-suid-install \
 	--enable-patchbay \
@@ -69,7 +69,8 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_desktopdir}
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	SUIDINSTALL="no"
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 
@@ -82,11 +83,14 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc ChangeLog README README.softsynth SECURITY
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/muse
+%attr(755,root,root) %{_bindir}/grepmidi
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/plugins
+%dir %{_libdir}/%{name}/qtplugins
 %dir %{_libdir}/%{name}/synthi
 %attr(755,root,root) %{_libdir}/%{name}/plugins/*
+%attr(755,root,root) %{_libdir}/%{name}/qtplugins/designer/*
 %attr(755,root,root) %{_libdir}/%{name}/synthi/*
 %{_desktopdir}/*.desktop
 %{_datadir}/muse
