@@ -7,3 +7,4 @@ Exec=/usr/bin/muse
 Terminal=false
 Type=Application
 Categories=Application;AudioVideo;
+# vi: encoding=utf-8
