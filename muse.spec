@@ -1,12 +1,12 @@
 Summary:	Linux Music Editor
 Summary(pl):	Edytor muzyczny dla Linuxa
 Name:		muse
-Version:	0.6.0pre8
+Version:	0.6.0
 Release:	1
 License:	GPL
 Group:		X11/Applications/Sound
 Source0:	http://muse.seh.de/bin/%{name}-%{version}.tar.bz2
-# Source0-md5: 9de8f1f413ebda34458379ba17049b3c
+# Source0-md5:	9718daf13d2587c369d049261abe7bcb
 Source1:	%{name}.desktop
 URL:		http://muse.seh.de/
 BuildRequires:	alsa-lib-devel
