@@ -2,13 +2,18 @@
 # Conditional build:
 %bcond_with	ladcca	# enable ladcca support
 %bcond_with	pch	# enable gcc 3.4.x pch support
+%ifarch %{ix86} amd64
 %bcond_without	fluid	# disable fluidsynth support
+%else
+%bcond_with	fluid	# fluidsynth support disabled for arch !ix86 !amd64
+%endif
+
 #
 Summary:	Linux Music Editor
 Summary(pl):	Edytor muzyczny dla Linuksa
 Name:		muse
 Version:	0.7.1
-Release:	0.2
+Release:	0.3
 License:	GPL
 Group:		X11/Applications/Sound
 Source0:	http://dl.sourceforge.net/lmuse/%{name}-%{version}.tar.bz2
