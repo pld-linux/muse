@@ -2,9 +2,9 @@
 Encoding=UTF-8
 Name=MuSE
 Comment=MuSE Audio/MIDI Sequnecer
-Comment[pl]=MuSE Audio/MIDI sekwencer
-Exec=/usr/bin/muse
+Comment[pl]=Sekwencer Audio/MIDI MuSE
+Exec=muse
 Terminal=false
 Type=Application
-Categories=Audio;Sequencer;
+Categories=Qt;Audio;Sequencer;
 # vi: encoding=utf-8
