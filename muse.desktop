@@ -4,6 +4,7 @@ Name=MuSE
 Comment=MuSE Audio/MIDI Sequnecer
 Comment[pl]=Sekwencer Audio/MIDI MuSE
 Exec=muse
+Icon=muse.png
 Terminal=false
 Type=Application
 Categories=Qt;Audio;Sequencer;
