@@ -2,7 +2,7 @@ Summary:	Linux Music Editor
 Summary(pl):	Edytor muzyczny dla Linuxa
 Name:		muse
 Version:	0.6.0
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Sound
 Source0:	http://muse.seh.de/bin/%{name}-%{version}.tar.bz2
@@ -12,6 +12,7 @@ URL:		http://muse.seh.de/
 BuildRequires:	alsa-lib-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	fluidsynth-devel >= 1.0.0
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	ladcca-devel
 BuildRequires:	libsndfile-devel
@@ -40,14 +41,12 @@ QTDIR="%{_prefix}"
 export QTDIR
 
 CXXFLAGS="%{rpmcflags} -DNDEBUG"
-# NOTE: current version doesn't work with fluidsynth
 # NOTE: you _must_ compile MusE with the same compiler you used to compile QT
 %configure \
 	--with-qt-prefix=%{_prefix} \
 	--with-qt-libraries=%{_libdir} \
 	--with-qt-includes=%{_includedir}/qt \
 	--disable-qttest \
-	--disable-iiwusynth \
 	--disable-suid-build \
 	--disable-suid-install \
 	--enable-patchbay \
