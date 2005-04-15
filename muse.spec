@@ -2,10 +2,10 @@
 # Conditional build:
 %bcond_with	ladcca	# enable ladcca support
 %bcond_with	pch	# enable gcc 3.4.x pch support
-%ifarch %{ix86} amd64
 %bcond_without	fluid	# disable fluidsynth support
-%else
-%bcond_with	fluid	# fluidsynth support disabled for arch !ix86 !amd64
+
+%ifnarch %{ix86} amd64
+%undefine	with_fluid	# fluidsynth support disabled for arch !ix86 !amd64
 %endif
 
 #
