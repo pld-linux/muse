@@ -4,7 +4,7 @@
 %bcond_with	pch	# enable gcc 3.4.x pch support
 %bcond_without	fluid	# disable fluidsynth support
 
-%ifnarch %{ix86} amd64
+%ifnarch %{ix86} %{x8664}
 %undefine	with_fluid	# fluidsynth support disabled for arch !ix86 !amd64
 %endif
 
@@ -36,6 +36,7 @@ BuildRequires:	openjade
 BuildRequires:	pkgconfig
 BuildRequires:	qt-designer-libs
 BuildRequires:	qt-devel >= 3.2.2
+BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
