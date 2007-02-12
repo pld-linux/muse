@@ -10,7 +10,7 @@
 
 #
 Summary:	Linux Music Editor
-Summary(pl):	Edytor muzyczny dla Linuksa
+Summary(pl.UTF-8):   Edytor muzyczny dla Linuksa
 Name:		muse
 Version:	0.7.1
 Release:	0.3
@@ -43,8 +43,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 MusE is a MIDI/Audio sequencer with recording and editing
 capabilities.
 
-%description -l pl
-MuSE jest sekwencerem MIDI/Audio z moøliwo∂ciami nagrywania i edycji.
+%description -l pl.UTF-8
+MuSE jest sekwencerem MIDI/Audio z mo≈ºliwo≈õciami nagrywania i edycji.
 
 %prep
 %setup -q
