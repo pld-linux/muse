@@ -10,7 +10,7 @@
 
 #
 Summary:	Linux Music Editor
-Summary(pl.UTF-8):   Edytor muzyczny dla Linuksa
+Summary(pl.UTF-8):	Edytor muzyczny dla Linuksa
 Name:		muse
 Version:	0.7.1
 Release:	0.3
