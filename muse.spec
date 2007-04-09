@@ -35,7 +35,7 @@ BuildRequires:	libtool
 BuildRequires:	openjade
 BuildRequires:	pkgconfig
 BuildRequires:	qt-designer-libs
-BuildRequires:	qt-devel >= 3.2.2
+BuildRequires:	qt-devel >= 6:3.2.2
 BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
