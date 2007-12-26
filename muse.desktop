@@ -1,10 +1,9 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=MuSE
 Comment=MuSE Audio/MIDI Sequnecer
 Comment[pl]=Sekwencer Audio/MIDI MuSE
 Exec=muse
-Icon=muse.png
+Icon=muse
 Terminal=false
 Type=Application
 Categories=Qt;Audio;Sequencer;
