@@ -62,8 +62,8 @@ export QTDIR
 
 # NOTE: you _must_ compile MusE with the same compiler you used to compile Qt
 %configure \
-	%{?!with_ladcca:--disable-ladcca} \
-	%{?!with_fluid:--disable-fluidsynth} \
+	%{!?with_ladcca:--disable-ladcca} \
+	%{!?with_fluid:--disable-fluidsynth} \
 	%{?with_pch:--enable-pch} \
 	--disable-suid-build \
 	--disable-suid-install \
