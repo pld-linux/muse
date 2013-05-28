@@ -2,7 +2,7 @@
 Name=MuSE
 Comment=MuSE Audio/MIDI Sequnecer
 Comment[pl]=Sekwencer Audio/MIDI MuSE
-Exec=muse
+Exec=muse2
 Icon=muse
 Terminal=false
 Type=Application
