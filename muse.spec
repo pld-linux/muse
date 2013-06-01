@@ -33,6 +33,9 @@ BuildRequires:	libsamplerate-devel >= 0.1.0
 BuildRequires:	libsndfile-devel >= 1.0.25
 BuildRequires:	libuuid-devel >= 0.1.8
 BuildRequires:	rpmbuild(macros) >= 1.213
+BuildRequires:	sed >= 4.0
+Requires:	gtk-update-icon-cache
+Requires:	hicolor-icon-theme
 Requires:	lash
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -46,7 +49,7 @@ MuSE jest sekwencerem MIDI/Audio z możliwościami nagrywania i edycji.
 %package doc
 Summary:	Manual for %{name}
 Summary(pl.UTF-8):	Podręcznik dla MusE
-Group:		X11/Applications/Sound
+Group:		Documentation
 
 %description doc
 Documentation for %{name}.
@@ -69,12 +72,11 @@ cd build
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
-
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT \
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
-install packaging/muse_icon.png $RPM_BUILD_ROOT%{_pixmapsdir}/muse.png
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+cp -p packaging/muse_icon.png $RPM_BUILD_ROOT%{_pixmapsdir}/muse.png
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/plugins/*.a
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/synthi/*.a
