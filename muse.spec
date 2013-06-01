@@ -10,7 +10,7 @@ Summary:	Linux Music Editor
 Summary(pl.UTF-8):	Edytor muzyczny dla Linuksa
 Name:		muse
 Version:	2.1.2
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Sound
 Source0:	http://downloads.sourceforge.net/lmuse/%{name}-%{version}.tar.gz
@@ -33,7 +33,6 @@ BuildRequires:	libsamplerate-devel >= 0.1.0
 BuildRequires:	libsndfile-devel >= 1.0.25
 BuildRequires:	libuuid-devel >= 0.1.8
 BuildRequires:	rpmbuild(macros) >= 1.213
-BuildRequires:	sed >= 4.0
 Requires:	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
 Requires:	lash
