@@ -16,6 +16,7 @@ Group:		X11/Applications/Sound
 Source0:	http://downloads.sourceforge.net/lmuse/%{name}-%{version}.tar.gz
 # Source0-md5:	ad917335ac05a3d62e3cd073af901001
 Source1:	%{name}.desktop
+Patch0:		%{name}-CMakeLists.txt.patch
 URL:		http://muse.seh.de/
 BuildRequires:	QtDesigner-devel
 BuildRequires:	QtSvg-devel
@@ -55,7 +56,7 @@ Dokumentacja do anta.
 
 %prep
 %setup -q
-sed -i 's,SET(MusE_INSTALL_NAME  "muse-2.1"),SET(MusE_INSTALL_NAME  "muse"),g' CMakeLists.txt
+%patch0 -p0
 
 %build
 install -d build
