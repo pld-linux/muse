@@ -6,6 +6,8 @@
 %undefine	with_fluid	# fluidsynth support disabled for arch !ix86 !amd64
 %endif
 
+%define qt_min_version	5.1.0
+
 Summary:	Linux Music Editor
 Summary(pl.UTF-8):	Edytor muzyczny dla Linuksa
 Name:		muse
@@ -19,9 +21,11 @@ Source1:	%{name}.desktop
 Patch0:		missing_includes.patch
 Patch1:		fluidsynth2.patch
 URL:		http://muse.seh.de/
-BuildRequires:	QtDesigner-devel
-BuildRequires:	QtSvg-devel
-BuildRequires:	QtUiTools-devel
+BuildRequires:	Qt5Core-devel >= %{qt_min_version}
+BuildRequires:	Qt5Svg-devel >= %{qt_min_version}
+BuildRequires:	Qt5UiTools-devel >= %{qt_min_version}
+BuildRequires:	Qt5Widgets-devel >= %{qt_min_version}
+BuildRequires:	Qt5Xml-devel >= %{qt_min_version}
 BuildRequires:	alsa-lib-devel >= 0.9.0
 BuildRequires:	cmake >= 2.8.0
 BuildRequires:	dssi-devel >= 0.9.0
@@ -36,6 +40,9 @@ BuildRequires:	libsndfile-devel >= 1.0.25
 BuildRequires:	libuuid-devel >= 0.1.8
 BuildRequires:	lilv-devel >= 0.22.0
 BuildRequires:	lv2-devel >= 1.12.0
+BuildRequires:	qt5-build >= %{qt_min_version}
+BuildRequires:	qt5-linguist >= %{qt_min_version}
+BuildRequires:	qt5-qmake >= %{qt_min_version}
 BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRequires:	rtaudio-devel >= 4.0
 BuildRequires:	sord-devel >= 0.14.0
@@ -161,7 +168,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_pixmapsdir}/muse.png
 %{_mandir}/man1/*
 %{_iconsdir}/hicolor/64x64/apps/muse_icon.png
-/usr/share/metainfo/muse.appdata.xml
+%{_datadir}/metainfo/muse.appdata.xml
 
 %files doc
 %defattr(644,root,root,755)
