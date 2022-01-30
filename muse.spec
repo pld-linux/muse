@@ -2,25 +2,18 @@
 # Conditional build:
 %bcond_without	fluid	# disable fluidsynth support
 
-%ifnarch %{ix86} %{x8664}
-%undefine	with_fluid	# fluidsynth support disabled for arch !ix86 !amd64
-%endif
-
 %define qt_min_version	5.1.0
 
 Summary:	Linux Music Editor
 Summary(pl.UTF-8):	Edytor muzyczny dla Linuksa
 Name:		muse
-Version:	3.0.2
+Version:	4.0.0
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Sound
-Source0:	http://downloads.sourceforge.net/lmuse/%{name}-%{version}.tar.gz
-# Source0-md5:	6e992f0f9d58adc3a2e2444dece37dfe
-Source1:	%{name}.desktop
-Patch0:		missing_includes.patch
-Patch1:		fluidsynth2.patch
-URL:		http://muse.seh.de/
+Source0:	https://github.com/muse-sequencer/muse/archive/%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	2cb1904a93c9cc06abea9f01959d2de7
+URL:		https://muse-sequencer.github.io/
 BuildRequires:	Qt5Core-devel >= %{qt_min_version}
 BuildRequires:	Qt5Svg-devel >= %{qt_min_version}
 BuildRequires:	Qt5UiTools-devel >= %{qt_min_version}
@@ -71,12 +64,32 @@ Dokumentacja do anta.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p2
+
+%{__sed} -E -i -e '1s,#!\s*/usr/bin/python(\s|$),#!%{__python3}\1,' \
+      src/utils/muse-find-unused-wavs \
+      src/utils/muse-song-convert.py
+
+%{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+python3(\s|$),#!%{__python3}\1,' \
+      src/share/scripts/ConstantLength \
+      src/share/scripts/ConstantVelocityForNote \
+      src/share/scripts/CreateBassline \
+      src/share/scripts/DoNothing \
+      src/share/scripts/Humanize \
+      src/share/scripts/RandomPosition1 \
+      src/share/scripts/RandomizeVelocityRelative \
+      src/share/scripts/RemoveAftertouch \
+      src/share/scripts/RemoveShortEvents \
+      src/share/scripts/Rhythm1 \
+      src/share/scripts/SpeedDouble \
+      src/share/scripts/SpeedHalf \
+      src/share/scripts/SwingQuantize1 \
+      src/share/scripts/TempoDelay
 
 %build
-install -d build
-cd build
+install -d src/build
+cd src/build
+export CFLAGS="%{rpmcflags} $(pkg-config --cflags atkmm-1.6)"
+export CXXFLAGS="%{rpmcxxflags} $(pkg-config --cflags atkmm-1.6)"
 %cmake \
 	-DMusE_DOC_DIR="%{_docdir}/%{name}-%{version}" \
 	../
@@ -85,16 +98,11 @@ cd build
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
-%{__make} -C build install \
+
+%{__make} -C src/build install \
 	DESTDIR=$RPM_BUILD_ROOT \
 
-cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
-cp -p packaging/muse_icon.png $RPM_BUILD_ROOT%{_pixmapsdir}/muse.png
-
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/plugins/*.a
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/synthi/*.a
-rm -f $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/COPYING
+%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/COPYING
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -110,9 +118,9 @@ rm -rf $RPM_BUILD_ROOT
 # do not use %doc, as it would remove files which are already there
 %{_docdir}/%{name}-%{version}/AUTHORS
 %{_docdir}/%{name}-%{version}/ChangeLog
-%{_docdir}/%{name}-%{version}/NEWS
 %{_docdir}/%{name}-%{version}/README*
 %{_docdir}/%{name}-%{version}/SECURITY
+%{_docdir}/muse-4.0.0/libdivide_LICENSE
 %dir %{_docdir}/%{name}-%{version}/deicsonze
 %{_docdir}/%{name}-%{version}/deicsonze/*
 %dir %{_docdir}/%{name}-%{version}/fluidsynth
@@ -123,52 +131,56 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/%{name}-%{version}/simpledrums/*
 %dir %{_docdir}/%{name}-%{version}/vam
 %{_docdir}/%{name}-%{version}/vam/*
-%attr(755,root,root) %{_bindir}/muse3
+%attr(755,root,root) %{_bindir}/muse4
+%attr(755,root,root) %{_bindir}/muse_plugin_scan
 %attr(755,root,root) %{_bindir}/grepmidi
-%dir %{_libdir}/%{name}-3.0
-%dir %{_libdir}/%{name}-3.0/modules
-%dir %{_libdir}/%{name}-3.0/plugins
-%dir %{_libdir}/%{name}-3.0/synthi
-%attr(755,root,root) %{_libdir}/%{name}-3.0/modules/*.so
-%attr(755,root,root) %{_libdir}/%{name}-3.0/plugins/*
-%attr(755,root,root) %{_libdir}/%{name}-3.0/synthi/*
-%dir %{_datadir}/%{name}-3.0
-%dir %{_datadir}/%{name}-3.0/demos
-%dir %{_datadir}/%{name}-3.0/drummaps
-%dir %{_datadir}/%{name}-3.0/instruments
-%dir %{_datadir}/%{name}-3.0/locale
-%dir %{_datadir}/%{name}-3.0/metronome
-%dir %{_datadir}/%{name}-3.0/plugins
-%dir %{_datadir}/%{name}-3.0/presets
-%dir %{_datadir}/%{name}-3.0/pybridge
-%dir %{_datadir}/%{name}-3.0/scoreglyphs
-%dir %{_datadir}/%{name}-3.0/scripts
-%dir %{_datadir}/%{name}-3.0/templates
-%dir %{_datadir}/%{name}-3.0/themes
-%dir %{_datadir}/%{name}-3.0/utils
-%dir %{_datadir}/%{name}-3.0/wallpapers
+%dir %{_libdir}/%{name}-4.0
+%dir %{_libdir}/%{name}-4.0/converters
+%dir %{_libdir}/%{name}-4.0/modules
+%dir %{_libdir}/%{name}-4.0/plugins
+%dir %{_libdir}/%{name}-4.0/synthi
+%attr(755,root,root) %{_libdir}/%{name}-4.0/converters/*.so
+%attr(755,root,root) %{_libdir}/%{name}-4.0/modules/*.so
+%attr(755,root,root) %{_libdir}/%{name}-4.0/plugins/*
+%attr(755,root,root) %{_libdir}/%{name}-4.0/synthi/*
+%dir %{_datadir}/%{name}-4.0
+%dir %{_datadir}/%{name}-4.0/demos
+%dir %{_datadir}/%{name}-4.0/drummaps
+%dir %{_datadir}/%{name}-4.0/instruments
+%dir %{_datadir}/%{name}-4.0/locale
+%dir %{_datadir}/%{name}-4.0/metronome
+%dir %{_datadir}/%{name}-4.0/plugins
+%dir %{_datadir}/%{name}-4.0/presets
+%dir %{_datadir}/%{name}-4.0/pybridge
+%dir %{_datadir}/%{name}-4.0/rdf
+%dir %{_datadir}/%{name}-4.0/scoreglyphs
+%dir %{_datadir}/%{name}-4.0/scripts
+%dir %{_datadir}/%{name}-4.0/templates
+%dir %{_datadir}/%{name}-4.0/themes
+%dir %{_datadir}/%{name}-4.0/utils
+%dir %{_datadir}/%{name}-4.0/wallpapers
 %{_datadir}/mime/packages/muse.xml
-%{_datadir}/%{name}-3.0/didyouknow.txt
-%{_datadir}/%{name}-3.0/splash.png
-%{_datadir}/%{name}-3.0/demos/*
-%{_datadir}/%{name}-3.0/drummaps/*
-%{_datadir}/%{name}-3.0/instruments/*
-%{_datadir}/%{name}-3.0/locale/*
-%{_datadir}/%{name}-3.0/metronome/*
-%{_datadir}/%{name}-3.0/plugins/*
-%{_datadir}/%{name}-3.0/presets/*
-%{_datadir}/%{name}-3.0/pybridge/*
-%{_datadir}/%{name}-3.0/scoreglyphs/*
-%{_datadir}/%{name}-3.0/scripts/*
-%{_datadir}/%{name}-3.0/templates/*
-%{_datadir}/%{name}-3.0/themes/*
-%{_datadir}/%{name}-3.0/utils/*
-%{_datadir}/%{name}-3.0/wallpapers/*
-%{_desktopdir}/muse.desktop
-%{_pixmapsdir}/muse.png
+%{_datadir}/%{name}-4.0/splash.jpg
+%{_datadir}/%{name}-4.0/didyouknow.txt
+%{_datadir}/%{name}-4.0/demos/*
+%{_datadir}/%{name}-4.0/drummaps/*
+%{_datadir}/%{name}-4.0/instruments/*
+%{_datadir}/%{name}-4.0/locale/*
+%{_datadir}/%{name}-4.0/metronome/*
+%{_datadir}/%{name}-4.0/plugins/*
+%{_datadir}/%{name}-4.0/presets/*
+%{_datadir}/%{name}-4.0/pybridge/*
+%{_datadir}/%{name}-4.0/rdf/*
+%{_datadir}/%{name}-4.0/scoreglyphs/*
+%{_datadir}/%{name}-4.0/scripts/*
+%{_datadir}/%{name}-4.0/templates/*
+%{_datadir}/%{name}-4.0/themes/*
+%{_datadir}/%{name}-4.0/utils/*
+%{_datadir}/%{name}-4.0/wallpapers/*
+%{_desktopdir}/org.musesequencer.Muse4.desktop
 %{_mandir}/man1/*
-%{_iconsdir}/hicolor/64x64/apps/muse_icon.png
-%{_datadir}/metainfo/muse.appdata.xml
+%{_iconsdir}/hicolor/*x*/apps/muse.png
+%{_datadir}/metainfo/org.musesequencer.Muse4.appdata.xml
 
 %files doc
 %defattr(644,root,root,755)
@@ -186,5 +198,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/%{name}-%{version}/muse_html/single/developer_docs/*
 %{_docdir}/%{name}-%{version}/muse_html/split/documentation/*
 %{_docdir}/%{name}-%{version}/muse_html/split/developer_docs/*
-
-
