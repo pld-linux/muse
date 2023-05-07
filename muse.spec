@@ -1,24 +1,24 @@
 #
 # Conditional build:
-%bcond_without	fluid	# disable fluidsynth support
+%bcond_without	fluid	# fluidsynth support
 
-%define qt_min_version	5.1.0
+%define	qt_ver	5.1.0
 
 Summary:	Linux Music Editor
 Summary(pl.UTF-8):	Edytor muzyczny dla Linuksa
 Name:		muse
 Version:	4.0.0
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		X11/Applications/Sound
 Source0:	https://github.com/muse-sequencer/muse/archive/%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	2cb1904a93c9cc06abea9f01959d2de7
 URL:		https://muse-sequencer.github.io/
-BuildRequires:	Qt5Core-devel >= %{qt_min_version}
-BuildRequires:	Qt5Svg-devel >= %{qt_min_version}
-BuildRequires:	Qt5UiTools-devel >= %{qt_min_version}
-BuildRequires:	Qt5Widgets-devel >= %{qt_min_version}
-BuildRequires:	Qt5Xml-devel >= %{qt_min_version}
+BuildRequires:	Qt5Core-devel >= %{qt_ver}
+BuildRequires:	Qt5Svg-devel >= %{qt_ver}
+BuildRequires:	Qt5UiTools-devel >= %{qt_ver}
+BuildRequires:	Qt5Widgets-devel >= %{qt_ver}
+BuildRequires:	Qt5Xml-devel >= %{qt_ver}
 BuildRequires:	alsa-lib-devel >= 0.9.0
 BuildRequires:	cmake >= 2.8.0
 BuildRequires:	dssi-devel >= 0.9.0
@@ -33,9 +33,9 @@ BuildRequires:	libsndfile-devel >= 1.0.25
 BuildRequires:	libuuid-devel >= 0.1.8
 BuildRequires:	lilv-devel >= 0.22.0
 BuildRequires:	lv2-devel >= 1.12.0
-BuildRequires:	qt5-build >= %{qt_min_version}
-BuildRequires:	qt5-linguist >= %{qt_min_version}
-BuildRequires:	qt5-qmake >= %{qt_min_version}
+BuildRequires:	qt5-build >= %{qt_ver}
+BuildRequires:	qt5-linguist >= %{qt_ver}
+BuildRequires:	qt5-qmake >= %{qt_ver}
 BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRequires:	rtaudio-devel >= 4.0
 BuildRequires:	sord-devel >= 0.14.0
@@ -52,15 +52,15 @@ capabilities.
 MuSE jest sekwencerem MIDI/Audio z możliwościami nagrywania i edycji.
 
 %package doc
-Summary:	Manual for %{name}
-Summary(pl.UTF-8):	Podręcznik dla MusE
+Summary:	MusE documentation
+Summary(pl.UTF-8):	Dokumentacja do MusE
 Group:		Documentation
 
 %description doc
-Documentation for %{name}.
+MusE documentation.
 
 %description doc -l pl.UTF-8
-Dokumentacja do anta.
+Dokumentacja do MusE.
 
 %prep
 %setup -q
