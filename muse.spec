@@ -8,7 +8,7 @@ Summary:	Linux Music Editor
 Summary(pl.UTF-8):	Edytor muzyczny dla Linuksa
 Name:		muse
 Version:	4.0.0
-Release:	4
+Release:	5
 License:	GPL v2
 Group:		X11/Applications/Sound
 Source0:	https://github.com/muse-sequencer/muse/archive/%{version}/%{name}-%{version}.tar.gz
