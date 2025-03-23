@@ -7,12 +7,12 @@
 Summary:	Linux Music Editor
 Summary(pl.UTF-8):	Edytor muzyczny dla Linuksa
 Name:		muse
-Version:	4.0.0
-Release:	5
+Version:	4.2.1
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Sound
 Source0:	https://github.com/muse-sequencer/muse/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	2cb1904a93c9cc06abea9f01959d2de7
+# Source0-md5:	7874a127d67bcae394463c486e4ce761
 URL:		https://muse-sequencer.github.io/
 BuildRequires:	Qt5Core-devel >= %{qt_ver}
 BuildRequires:	Qt5Svg-devel >= %{qt_ver}
@@ -83,7 +83,9 @@ Dokumentacja do MusE.
       src/share/scripts/SpeedDouble \
       src/share/scripts/SpeedHalf \
       src/share/scripts/SwingQuantize1 \
-      src/share/scripts/TempoDelay
+      src/share/scripts/TempoDelay \
+      src/share/scripts/Reverse \
+      src/share/scripts/SpeedChange
 
 %build
 install -d src/build
@@ -120,7 +122,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/%{name}-%{version}/ChangeLog
 %{_docdir}/%{name}-%{version}/README*
 %{_docdir}/%{name}-%{version}/SECURITY
-%{_docdir}/muse-4.0.0/libdivide_LICENSE
+%{_docdir}/muse-4.2.1/libdivide_LICENSE
 %dir %{_docdir}/%{name}-%{version}/deicsonze
 %{_docdir}/%{name}-%{version}/deicsonze/*
 %dir %{_docdir}/%{name}-%{version}/fluidsynth
@@ -134,53 +136,53 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/muse4
 %attr(755,root,root) %{_bindir}/muse_plugin_scan
 %attr(755,root,root) %{_bindir}/grepmidi
-%dir %{_libdir}/%{name}-4.0
-%dir %{_libdir}/%{name}-4.0/converters
-%dir %{_libdir}/%{name}-4.0/modules
-%dir %{_libdir}/%{name}-4.0/plugins
-%dir %{_libdir}/%{name}-4.0/synthi
-%attr(755,root,root) %{_libdir}/%{name}-4.0/converters/*.so
-%attr(755,root,root) %{_libdir}/%{name}-4.0/modules/*.so
-%attr(755,root,root) %{_libdir}/%{name}-4.0/plugins/*
-%attr(755,root,root) %{_libdir}/%{name}-4.0/synthi/*
-%dir %{_datadir}/%{name}-4.0
-%dir %{_datadir}/%{name}-4.0/demos
-%dir %{_datadir}/%{name}-4.0/drummaps
-%dir %{_datadir}/%{name}-4.0/instruments
-%dir %{_datadir}/%{name}-4.0/locale
-%dir %{_datadir}/%{name}-4.0/metronome
-%dir %{_datadir}/%{name}-4.0/plugins
-%dir %{_datadir}/%{name}-4.0/presets
-%dir %{_datadir}/%{name}-4.0/pybridge
-%dir %{_datadir}/%{name}-4.0/rdf
-%dir %{_datadir}/%{name}-4.0/scoreglyphs
-%dir %{_datadir}/%{name}-4.0/scripts
-%dir %{_datadir}/%{name}-4.0/templates
-%dir %{_datadir}/%{name}-4.0/themes
-%dir %{_datadir}/%{name}-4.0/utils
-%dir %{_datadir}/%{name}-4.0/wallpapers
+%dir %{_libdir}/%{name}-4.2
+%dir %{_libdir}/%{name}-4.2/converters
+%dir %{_libdir}/%{name}-4.2/modules
+%dir %{_libdir}/%{name}-4.2/plugins
+%dir %{_libdir}/%{name}-4.2/synthi
+%attr(755,root,root) %{_libdir}/%{name}-4.2/converters/*.so
+%attr(755,root,root) %{_libdir}/%{name}-4.2/modules/*.so
+%attr(755,root,root) %{_libdir}/%{name}-4.2/plugins/*
+%attr(755,root,root) %{_libdir}/%{name}-4.2/synthi/*
+%dir %{_datadir}/%{name}-4.2
+%dir %{_datadir}/%{name}-4.2/demos
+%dir %{_datadir}/%{name}-4.2/drummaps
+%dir %{_datadir}/%{name}-4.2/instruments
+%dir %{_datadir}/%{name}-4.2/locale
+%dir %{_datadir}/%{name}-4.2/metronome
+%dir %{_datadir}/%{name}-4.2/plugins
+%dir %{_datadir}/%{name}-4.2/presets
+%dir %{_datadir}/%{name}-4.2/pybridge
+%dir %{_datadir}/%{name}-4.2/rdf
+%dir %{_datadir}/%{name}-4.2/scoreglyphs
+%dir %{_datadir}/%{name}-4.2/scripts
+%dir %{_datadir}/%{name}-4.2/templates
+%dir %{_datadir}/%{name}-4.2/themes
+%dir %{_datadir}/%{name}-4.2/utils
+%dir %{_datadir}/%{name}-4.2/wallpapers
 %{_datadir}/mime/packages/muse.xml
-%{_datadir}/%{name}-4.0/splash.jpg
-%{_datadir}/%{name}-4.0/didyouknow.txt
-%{_datadir}/%{name}-4.0/demos/*
-%{_datadir}/%{name}-4.0/drummaps/*
-%{_datadir}/%{name}-4.0/instruments/*
-%{_datadir}/%{name}-4.0/locale/*
-%{_datadir}/%{name}-4.0/metronome/*
-%{_datadir}/%{name}-4.0/plugins/*
-%{_datadir}/%{name}-4.0/presets/*
-%{_datadir}/%{name}-4.0/pybridge/*
-%{_datadir}/%{name}-4.0/rdf/*
-%{_datadir}/%{name}-4.0/scoreglyphs/*
-%{_datadir}/%{name}-4.0/scripts/*
-%{_datadir}/%{name}-4.0/templates/*
-%{_datadir}/%{name}-4.0/themes/*
-%{_datadir}/%{name}-4.0/utils/*
-%{_datadir}/%{name}-4.0/wallpapers/*
-%{_desktopdir}/org.musesequencer.Muse4.desktop
+%{_datadir}/%{name}-4.2/splash.jpg
+%{_datadir}/%{name}-4.2/didyouknow.txt
+%{_datadir}/%{name}-4.2/demos/*
+%{_datadir}/%{name}-4.2/drummaps/*
+%{_datadir}/%{name}-4.2/instruments/*
+%{_datadir}/%{name}-4.2/locale/*
+%{_datadir}/%{name}-4.2/metronome/*
+%{_datadir}/%{name}-4.2/plugins/*
+%{_datadir}/%{name}-4.2/presets/*
+%{_datadir}/%{name}-4.2/pybridge/*
+%{_datadir}/%{name}-4.2/rdf/*
+%{_datadir}/%{name}-4.2/scoreglyphs/*
+%{_datadir}/%{name}-4.2/scripts/*
+%{_datadir}/%{name}-4.2/templates/*
+%{_datadir}/%{name}-4.2/themes/*
+%{_datadir}/%{name}-4.2/utils/*
+%{_datadir}/%{name}-4.2/wallpapers/*
+%{_desktopdir}/io.github.muse_sequencer.Muse.desktop
 %{_mandir}/man1/*
 %{_iconsdir}/hicolor/*x*/apps/muse.png
-%{_datadir}/metainfo/org.musesequencer.Muse4.appdata.xml
+%{_datadir}/metainfo/io.github.muse_sequencer.Muse.appdata.xml
 
 %files doc
 %defattr(644,root,root,755)
