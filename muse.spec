@@ -19,29 +19,50 @@ BuildRequires:	Qt5Svg-devel >= %{qt_ver}
 BuildRequires:	Qt5UiTools-devel >= %{qt_ver}
 BuildRequires:	Qt5Widgets-devel >= %{qt_ver}
 BuildRequires:	Qt5Xml-devel >= %{qt_ver}
-BuildRequires:	alsa-lib-devel >= 0.9.0
-BuildRequires:	cmake >= 2.8.0
-BuildRequires:	dssi-devel >= 0.9.0
+BuildRequires:	alsa-lib-devel >= 1.1.3
+BuildRequires:	atkmm-devel >= 1.6
+BuildRequires:	cmake >= 3.10.2
+BuildRequires:	dssi-devel >= 1.1.1
 %{?with_fluid:BuildRequires:	fluidsynth-devel >= 2.0.0}
-BuildRequires:	gtkmm-devel
-BuildRequires:	jack-audio-connection-kit-devel >= 0.103
+BuildRequires:	gtk+2-devel >= 1:2.0
+BuildRequires:	gtkmm-devel >= 2.4
+BuildRequires:	jack-audio-connection-kit-devel >= 0.125.0
 BuildRequires:	ladspa-devel
 BuildRequires:	lash-devel >= 0.2
-BuildRequires:	liblo >= 0.23
-BuildRequires:	libsamplerate-devel >= 0.1.0
-BuildRequires:	libsndfile-devel >= 1.0.25
+BuildRequires:	libinstpatch-devel >= 1.1.7
+BuildRequires:	liblo-devel >= 0.29
+BuildRequires:	liblrdf-devel >= 0.5.0
+BuildRequires:	libsamplerate-devel >= 0.1.9
+BuildRequires:	libsndfile-devel >= 1.0.28
 BuildRequires:	libuuid-devel >= 0.1.8
-BuildRequires:	lilv-devel >= 0.22.0
-BuildRequires:	lv2-devel >= 1.12.0
+BuildRequires:	lilv-devel >= 0.24.0
+BuildRequires:	lv2-devel >= 1.18.0
+BuildRequires:	pkgconfig
+BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	qt5-build >= %{qt_ver}
 BuildRequires:	qt5-linguist >= %{qt_ver}
 BuildRequires:	qt5-qmake >= %{qt_ver}
 BuildRequires:	rpmbuild(macros) >= 1.213
-BuildRequires:	rtaudio-devel >= 4.0
-BuildRequires:	sord-devel >= 0.14.0
+BuildRequires:	rtaudio-devel >= 5.0
+BuildRequires:	rubberband-devel >= 1.8.1
+BuildRequires:	serd-devel >= 0.30.0
+BuildRequires:	sord-devel >= 0.16.0
+Requires:	alsa-lib >= 1.1.3
+Requires:	dssi >= 1.1.1
 Requires:	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
-Suggests:	lash
+Requires:	jack-audio-connection-kit-libs >= 0.125.0
+Requires:	libinstpatch >= 1.1.7
+Requires:	liblo >= 0.29
+Requires:	liblrdf >= 0.5.0
+Requires:	libsamplerate >= 0.1.9
+Requires:	libsndfile >= 1.0.28
+Requires:	lilv >= 0.24.0
+Requires:	lv2 >= 1.18.0
+Requires:	rubberband-libs >= 1.8.1
+Requires:	serd >= 0.30.0
+Requires:	sord >= 0.16.0
+Suggests:	lash >= 0.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
